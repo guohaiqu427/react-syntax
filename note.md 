@@ -1,0 +1,51 @@
+core: 
+1. JSX under the hook uses React.createElement
+2. Component must always return a Markup, which is the result of React.createElement
+3. One way data flow 
+
+
+syntax: 
+
+
+
+
+
+
+
+
+toolkits: 
+    prettier setup: 
+        npm install -D prettier
+        create .prettierrc file to config, place an {} in there
+        turn on format on save in settings
+        install vscode extension : prettier code formatter
+        turn on "Prettier: Require Config" in settings
+        set editor: default formatter to  prettier code formatter
+        
+        or: package.json 
+        "format": "prettier --write \"src/**/*.{js,jsx}\"",
+
+    eslint setup: 
+        npm i -D eslint eslint-config-prettier
+        npm i -D eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react
+
+        create .eslintrc.json file
+        copy the config
+        package.json: "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ not so important : 
+ 1. call root.render()  to render the entire react app
