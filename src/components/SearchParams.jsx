@@ -1,6 +1,8 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import Results from "./Results";
 import useBreedList from "../customHooks/useBreedList";
+import fetchBreedList from "../fetch/fetchBreedList";
 
 export default function SearchParams() {
   const ANIMALS = ["bird", "cat", "dog", "reptile"];
@@ -8,7 +10,7 @@ export default function SearchParams() {
   const [animal, setAnimal] = useState("dog");
   const [breed, setBreed] = useState("");
   const [pets, setPets] = useState([]);
-  const [BREEDS] = useBreedList(animal);
+  const BREEDS = useBreedList(animal);
 
   useEffect(() => {
     requestPets();
@@ -20,10 +22,8 @@ export default function SearchParams() {
       `https://pets-v2.dev-apis.com/pets?animal=${animal}&location=${location}&breed=${breed}`
     );
     const json = await res.json();
-    console.log(json.pets);
     setPets(json.pets);
   }
-
   return (
     <div className="search-param">
       SearchParams
