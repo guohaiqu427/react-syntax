@@ -112,6 +112,50 @@ passing props:
          return <h1>{text.greeting}</h1>;
     };  
 
+routes 
+    npm i react-router-dom
+    App.jsx 
+     <BrowserRouter>
+        <Routes>
+          <Route path="/details/:id" element={<Details />}></Route>
+        </...>
+      </...>
+
+useParams 
+    import { useParams } from "react-router-dom";
+     const { id } = useParams();
+
+Query
+    1. npm i @tanstack/react-query
+
+    2. App.jsx
+    import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+    
+    <QueryClientProvider client={queryClient}>
+        <Routes>
+            ....
+        </Routes>
+    </QueryClientProvider>
+
+    3. Componet.jsx 
+    import {useQuery} from "@tanstack/react-query"
+    import apiCall from "./somewhere"
+
+    const result = useQuery(["cached", queryKey1, querykey2], apiCall)
+
+    4. customHook.js 
+    const apiCall = async ({queryKey}) => {
+        ...
+        const one = queryKey[1]
+        const two = querykey[2]
+        ...
+        querykey checking
+        +
+        fetch 
+        +
+        error ahndling 
+        ...
+    }
 
 
 

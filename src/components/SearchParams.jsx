@@ -3,8 +3,7 @@ import Results from "./Results";
 import useBreedList from "../customHooks/useBreedList";
 
 export default function SearchParams() {
-  const ANIMALS = ["bird", "cat", "dog", "rabbit", "reptile"];
-
+  const ANIMALS = ["bird", "cat", "dog", "reptile"];
   const [location, setLocation] = useState("");
   const [animal, setAnimal] = useState("dog");
   const [breed, setBreed] = useState("");
