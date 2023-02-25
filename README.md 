@@ -137,26 +137,14 @@ Query
         </Routes>
     </QueryClientProvider>
 
-    3. Componet.jsx 
-    import {useQuery} from "@tanstack/react-query"
-    import apiCall from "./somewhere"
+    3. fetch.js
 
-    const result = useQuery(["cached", queryKey1, querykey2], apiCall)
+    4. customHook.js (optional)
 
-    4. customHook.js 
-    const apiCall = async ({queryKey}) => {
-        ...
-        const one = queryKey[1]
-        const two = querykey[2]
-        ...
-        querykey checking
-        +
-        fetch 
-        +
-        error ahndling 
-        ...
-    }
+    5. component 
 
+    a. check data structure of useQuerey 
+    b. use ?.syntax 
 
 
 

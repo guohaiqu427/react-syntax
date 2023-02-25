@@ -1,36 +1,36 @@
-/* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Results from "./Results";
 import useBreedList from "../customHooks/useBreedList";
-import fetchBreedList from "../fetch/fetchBreedList";
+import fetchPets from "../fetch/fetchPets";
+import { useQuery } from "@tanstack/react-query";
+const ANIMALS = ["bird", "cat", "dog", "reptile"];
 
 export default function SearchParams() {
-  const ANIMALS = ["bird", "cat", "dog", "reptile"];
-  const [location, setLocation] = useState("");
   const [animal, setAnimal] = useState("dog");
-  const [breed, setBreed] = useState("");
-  const [pets, setPets] = useState([]);
   const BREEDS = useBreedList(animal);
+  const [searchParams, setSearchParams] = useState({
+    animal: "",
+    breed: "",
+    location: "",
+  });
 
-  useEffect(() => {
-    requestPets();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const result = useQuery(["searchPets", searchParams], fetchPets);
+  const pets = result?.data?.pets ?? [];
 
-  async function requestPets() {
-    const res = await fetch(
-      `https://pets-v2.dev-apis.com/pets?animal=${animal}&location=${location}&breed=${breed}`
-    );
-    const json = await res.json();
-    setPets(json.pets);
-  }
   return (
     <div className="search-param">
       SearchParams
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          requestPets();
+          const formData = new FormData(e.target);
+          const obj = {
+            animal: formData.get("animal") ?? "",
+            location: formData.get("location") ?? "",
+            breed: formData.get("breed") ?? "",
+          };
+          setSearchParams(obj);
+          console.log(searchParams);
         }}
       >
         <label htmlFor="location">Location</label>
@@ -39,10 +39,6 @@ export default function SearchParams() {
           name="location"
           id="location"
           placeholder="Location"
-          value={location}
-          onChange={(e) => {
-            setLocation(e.target.value);
-          }}
         />
         <label htmlFor="animal">Animal</label>
         <select
@@ -58,14 +54,7 @@ export default function SearchParams() {
         </select>
 
         <label htmlFor="breed">Breed</label>
-        <select
-          name="breed"
-          id="breed"
-          value={breed}
-          onChange={(e) => {
-            setBreed(e.target.value);
-          }}
-        >
+        <select name="breed" id="breed" disabled={BREEDS.length === 0}>
           <option />
           {BREEDS.map((breed) => (
             <option key={breed}>{breed}</option>
