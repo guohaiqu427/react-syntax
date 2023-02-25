@@ -160,11 +160,57 @@ ClassComponent
         ...
         in fn component, lifecycles are bundled into useEffect.
 
+ErrorBoundaries 
+
+    it has to be a class component 
+    needs function getDerivedStateFromError(), whenever there is an error, calls this fn.
+    then render error ui or display child component 
+    has to render a child component, 
+    export default function DetailsErrorBoundaries() {
+    return (
+        <ErrorBoundaries>
+        <Details />
+        </ErrorBoundaries>
+    );
+    }
+
+Portal: 
+    allows you to render to a different place. 
+    Modal: Portal 
+    Root : App
+
+    0.create a modal dom element
+    1. create a unique container 
+    2. creatPortal to append child to container 
+    3. conditionlly render
+
+    // again: prop names typos
 
 
+context: 
+    app level state
+    trade off: hard to track where it come from
+    its NOT readonly for child component. 
+    
+    1. adtopedPetContext.jsx 
+    import {createContext} from "react"
+    export default const adtopedPet = createContext()
 
+    2. App.js 
+    import (1.adtopedPetContext.js) from "..."
+    const adtopedPet = useState(null) // only use, not const [a, setA] = useState()
+    <adtopedPetContext.Provider value = {adtopedPet}>
 
+    3. Details.jsx (use the context in CHILDREN)
+    import {useContext} from "react"
+    import (1.adtopedPetContext.js) from "..." 
+    
+    a.const [adoptedPet, setAdoptedPet] = useContext(AdoptedPetContext)
+    b.const [_, setAdoptedPet] = useContext(AdoptedPetContext)
+    c.const [adoptedPet] = useContext(AdoptedPetContext)
 
+    set: setAdoptedPet("1")
+    use: const a = adoptedPet
 
 
 
@@ -218,3 +264,7 @@ toolkits:
 
  not so important : 
  1. call root.render()  to render the entire react app
+
+
+
+

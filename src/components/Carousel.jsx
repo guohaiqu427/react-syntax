@@ -1,3 +1,4 @@
+/* eslint-disable no-unreachable */
 import { Component } from "react";
 
 export default class Carousel extends Component {
@@ -10,6 +11,7 @@ export default class Carousel extends Component {
   };
 
   render() {
+    // throw new Error("lol"); test error boundary
     const { active } = this.state;
     const { images } = this.props;
 
