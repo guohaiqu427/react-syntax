@@ -138,6 +138,8 @@ Query
     </QueryClientProvider>
 
     3. fetch.js
+           ({queryKey}), DO NOT FORGET {}
+
 
     4. customHook.js (optional)
 
@@ -145,6 +147,18 @@ Query
 
     a. check data structure of useQuerey 
     b. use ?.syntax 
+
+ClassComponent 
+
+    class component does not have hooks 
+    extends from react component 
+    need to have a render fn, does not necessary return a markup with it. 
+    lifecycles: 
+        componentdidmount (){}
+        componentwillmount (){}
+        coomponentdidupdate(){}
+        ...
+        in fn component, lifecycles are bundled into useEffect.
 
 
 
