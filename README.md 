@@ -138,12 +138,31 @@ Query
     </QueryClientProvider>
 
     3. fetch.js
-           ({queryKey}), DO NOT FORGET {}
+        ({queryKey}), DO NOT FORGET {}
+
+        export default async function fetchPet({ queryKey }) {
+        const id = queryKey[1];
+        const result = await fetch(`https://pets-v2.dev-apis.com/pets?id=${id}`);
+        // add error handling
+        return result.json();
+        }
 
 
     4. customHook.js (optional)
+    import { useQuery } from "@tanstack/react-query";
+    import fetchBreedList from "../fetch/fetchBreedList";
+
+    export default function useBreedList(animal) {
+    const result = useQuery(["breeds", animal], fetchBreedList);
+    return [...(result?.data?.breeds ?? [])];
+    }
 
     5. component 
+        1. connect to step4 ==> const BREEDS = useBreedList(animal);
+        2. connect to step3 ==>   const result = useQuery(["searchPets", searchParams], fetchPets);
+                                  const pets = result?.data?.pets ?? [];
+
+
 
     a. check data structure of useQuerey 
     b. use ?.syntax 
